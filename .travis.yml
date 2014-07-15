@@ -22,7 +22,7 @@ before_script:
 
 script:
   - cd ext/pimple
-  - if [ "$PIMPLE_EXT" == "yes" ]; then yes n | make test | tee output ; grep -E 'Tests failed +. +0' output; fi
+  - if [ "$PIMPLE_EXT" == "yes" ]; then yes n | make test | tee output ; grep -E 'Tests failed +. +0' output; cat tests/*.log; fi
   - cd ../..
   - phpunit
 
