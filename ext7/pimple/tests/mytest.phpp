@@ -1,0 +1,40 @@
+<?php
+class RouteCollection { }
+class ControllerCollection { }
+class ExceptionHandler { }
+
+
+class MyPimple extends Pimple
+{
+   public function __construct($values)
+    {
+        parent::__construct();
+
+        $app = $this;
+
+        $this['routes'] = function () {
+            return new RouteCollection();
+        };
+
+        $this['controllers'] = function () use ($app) {
+            return $app['controllers_factory'];
+        };
+
+        $this['controllers_factory'] = $this->factory(function () use ($app) {
+            return new ControllerCollection($app['route_factory']);
+        });
+
+        $this['route_class'] = 'Silex\\Route';
+        $this['route_factory'] = $this->factory(function () use ($app) {
+            return new $app['route_class']();
+        });
+
+        $this['exception_handler'] = function () use ($app) {
+            return new ExceptionHandler($app['debug']);
+        };
+    }
+}
+
+$p = new MyPimple(array('foo'));
+
+
