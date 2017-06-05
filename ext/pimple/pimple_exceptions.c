@@ -30,11 +30,6 @@
 #include "pimple_psr.h"
 #include "pimple_exceptions.h"
 
-PHPAPI zend_class_entry *pimple_ce_ExpectedInvokableException;
-PHPAPI zend_class_entry *pimple_ce_FrozenServiceException;
-PHPAPI zend_class_entry *pimple_ce_InvalidServiceIdentifierException;
-PHPAPI zend_class_entry *pimple_ce_UnknownIdentifierException;
-
 /* parent::__construct("Something with %s", $arg1) */
 static void pimple_exception_call_parent_constructor(zval *this_ptr, const char *format, const char *arg1 TSRMLS_DC)
 {
